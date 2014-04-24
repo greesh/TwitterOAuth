@@ -4,15 +4,40 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <TextView
-            android:layout_width="fill_parent"
+    <EditText
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:text="@string/hello"
-            android:id="@+id/textView"
-            />
+            android:text=""
+            android:hint="User name"
+            android:id="@+id/editText"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"/>
+    <EditText
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="Password"
+            android:layout_gravity="center"
+            android:id="@+id/editText1"
+            android:layout_marginBottom="32dp"/>
+
     <Button
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/login"
+            android:text="Login"
+            android:layout_gravity="center"/>
+    <Button
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_up"
+            android:text="sign up"
+            android:layout_gravity="center"/>
+    <Button
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/log_in_with_twitter"
+            android:text="Log in with Twitter"
             android:layout_gravity="center"/>
 </LinearLayout>

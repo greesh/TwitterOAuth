@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="16dp"
+              android:isScrollContainer="true">
+    <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="16dp">
+            <EditText
+                    android:layout_width="240dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/name"
+                    android:hint="Name"
+                    android:inputType="text"
+                    />
+            <EditText
+                    android:layout_width="240dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/user_name"
+                    android:hint="UserName"
+                    android:inputType="text"
+                    />
+            <EditText
+                    android:layout_width="240dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/email"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    />
+            <EditText
+                    android:layout_width="240dp"
+                    android:layout_height="56dp"
+                    android:id="@+id/contact_number"
+                    android:hint="Contact No"
+                    android:inputType="phone"
+                    />
+            <EditText android:layout_width="240dp"
+                      android:layout_height="56dp"
+                      android:id="@+id/password"
+                      android:hint="Password"
+                      android:inputType="textPassword"
+                    />
+            <EditText android:layout_width="240dp"
+                      android:layout_height="56dp"
+                      android:id="@+id/confirm_password"
+                      android:hint="Confirm Password"
+                      android:inputType="textPassword"
+                    />
+
+            <Button
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:text="SignUp with Email"
+                    android:layout_gravity="bottom"
+                    android:id="@+id/sign_up_with_twitter"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

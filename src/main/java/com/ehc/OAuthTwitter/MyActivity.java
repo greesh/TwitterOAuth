@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
@@ -16,8 +15,7 @@ import twitter4j.auth.RequestToken;
 import java.util.List;
 
 public class MyActivity extends Activity {
-  Button button;
-  TextView textView;
+  Button logInWithTwitter;
   Twitter twitter;
   User user;
   RequestToken requestToken;
@@ -30,12 +28,11 @@ public class MyActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    button = (Button) findViewById(R.id.button);
-    textView = (TextView) findViewById(R.id.textView);
-    button.setBackgroundResource(R.drawable.twitter);
+    logInWithTwitter = (Button) findViewById(R.id.log_in_with_twitter);
+    logInWithTwitter.setBackgroundResource(R.drawable.twitter);
     Log.d("oncreate", "oncreate");
-    textView.setText("success");
-    button.setOnClickListener(new View.OnClickListener() {
+
+    logInWithTwitter.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         OAuthLogin();
@@ -64,6 +61,7 @@ public class MyActivity extends Activity {
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     Log.d("onCreate", "calling on new intent");
+
     Uri uri = intent.getData();
     try {
       Log.d("onCreate", "Verifier");
@@ -86,15 +84,16 @@ public class MyActivity extends Activity {
     if (null != token && null != secret) {
       List<Status> statuses = null;
       try {
-        twitter.setOAuthAccessToken(new AccessToken(token, secret));
+       twitter.setOAuthAccessToken(new AccessToken(token, secret));
         statuses = twitter.getHomeTimeline();
 
         int id = (int) twitter.getId();
         user = twitter.showUser(id);
-        Log.d("info of the user", user.getName() + "\n" + user.getFriendsCount() + "\n" + user.getBiggerProfileImageURL() + "\n" + user.isVerified() + "\n" + user.getFollowersCount() + "\n" + user.getId() + "\n" + user.getBiggerProfileImageURLHttps() + "\n" + user.getDescription() + "\n" + user.getLocation() + "\n" + user.getScreenName() + "\n" + user.getStatus() + "\n" + user.getURL());
-        textView.setText(user.getName() + "\n" + user.getFriendsCount());
-        Toast.makeText(this, statuses.get(0).getText(), Toast.LENGTH_LONG)
-            .show();
+        Intent intent=new Intent(getApplicationContext(),RegisterActivity.class);
+        intent.putExtra("name",user.getName());
+        intent.putExtra("screenName",user.getScreenName());
+        Log.d("info of the user", user.getName() + "\n" + user.getFriendsCount() + "\n" + user.getBiggerProfileImageURL() + "\n" + user.isVerified() + "\n" + user.toString() + "\n" + user.getId() + "\n" + user.getBiggerProfileImageURLHttps() + "\n" + user.getDescription() + "\n" + user.getLocation() + "\n" + user.getScreenName() + "\n" + user.getStatus() + "\n" + user.getURL());
+        startActivity(intent);
       } catch (Exception ex) {
         Toast.makeText(this, "Error:" + ex.getMessage(),
             Toast.LENGTH_LONG).show();
