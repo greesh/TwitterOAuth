@@ -2,6 +2,7 @@ package com.ehc.OAuthTwitter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +20,14 @@ public class RegisterActivity extends Activity {
   EditText userName;
   EditText name;
   EditText lastName;
-  EditText email;
+  public static EditText email;
   EditText password;
   EditText confirmPassword;
   EditText contactNumber;
   EditText address;
   Button signUp;
   Button signUpWithMail;
+  public static String profileName;
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -33,9 +35,9 @@ public class RegisterActivity extends Activity {
     getWidgets();
     applyAction();
     Intent intent = getIntent();
-    String name = intent.getStringExtra("name");
+    profileName = intent.getStringExtra("name");
     String ScreenName = intent.getStringExtra("screenName");
-    populateFields(name, ScreenName);
+    populateFields(profileName, ScreenName);
 
   }
 
@@ -71,11 +73,34 @@ public class RegisterActivity extends Activity {
           confirmPassword.setError("Password doesn't match");
           return;
         }
-        Toast.makeText(getApplicationContext(),"successfully registered",1000);
+        saveUser();
       }
     });
   }
 
+  private void saveUser() {
+    DatabaseHelper dbHelper = new DatabaseHelper(this);
+    SQLiteDatabase database = dbHelper.getWritableDatabase();
+    if (database != null) {
+      String query = "insert into user(NAME,USERNAME,EMAIL,PASSWORD,PHONENUMBER) "
+          + "values('" + name.getText()
+          + "','" + userName.getText()
+          + "','"
+          + email.getText()
+          + "','" + password.getText()
+          + "'," + contactNumber.getText()
+          + ")";
+      database.execSQL(query);
+      database.close();
+      Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_LONG).show();
+      startDashboard();
+    }
+  }
+
+  private void startDashboard() {
+    Intent intent = new Intent(this, DashBoardActivity.class);
+    startActivity(intent);
+  }
 
   private void populateFields(String name, String screenName) {
     userName.setText(screenName);

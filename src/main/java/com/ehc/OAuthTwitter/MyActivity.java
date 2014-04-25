@@ -84,15 +84,30 @@ public class MyActivity extends Activity {
     if (null != token && null != secret) {
       List<Status> statuses = null;
       try {
-       twitter.setOAuthAccessToken(new AccessToken(token, secret));
+        twitter.setOAuthAccessToken(new AccessToken(token, secret));
         statuses = twitter.getHomeTimeline();
-
+        Log.d("statuses", statuses.toString());
+        for (Status status : statuses)
+          Log.d("statuses", status.toString());
         int id = (int) twitter.getId();
         user = twitter.showUser(id);
-        Intent intent=new Intent(getApplicationContext(),RegisterActivity.class);
-        intent.putExtra("name",user.getName());
-        intent.putExtra("screenName",user.getScreenName());
-        Log.d("info of the user", user.getName() + "\n" + user.getFriendsCount() + "\n" + user.getBiggerProfileImageURL() + "\n" + user.isVerified() + "\n" + user.toString() + "\n" + user.getId() + "\n" + user.getBiggerProfileImageURLHttps() + "\n" + user.getDescription() + "\n" + user.getLocation() + "\n" + user.getScreenName() + "\n" + user.getStatus() + "\n" + user.getURL());
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        intent.putExtra("name", user.getName());
+        intent.putExtra("screenName", user.getScreenName());
+        Log.d("info of the user",
+            user.getName() + "\n" +
+                user.getFriendsCount() + "\n" +
+                user.getBiggerProfileImageURL() + "\n" +
+                user.isVerified() + "\n" +
+                user.toString() + "\n" +
+                user.getId() + "\n" +
+                user.getBiggerProfileImageURLHttps() + "\n" +
+                user.getDescription() + "\n" +
+                user.getLocation() + "\n" +
+                user.getScreenName() + "\n" +
+                user.getStatus() + "\n" +
+                user.getTimeZone() + "\n" +
+                user.getURL());
         startActivity(intent);
       } catch (Exception ex) {
         Toast.makeText(this, "Error:" + ex.getMessage(),
